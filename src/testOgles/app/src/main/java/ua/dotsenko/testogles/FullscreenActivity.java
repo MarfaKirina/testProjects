@@ -32,7 +32,7 @@ public class FullscreenActivity extends Activity {
             //prevents error of not chosen config
             super.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
             setRenderer(renderer);
-            setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+            //setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         }
     }
     @Override
