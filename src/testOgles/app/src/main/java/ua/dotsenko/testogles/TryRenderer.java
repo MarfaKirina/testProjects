@@ -34,7 +34,7 @@ public class TryRenderer implements GLSurfaceView.Renderer{
         Matrix.setLookAtM(viewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1f, 0f);
         Matrix.multiplyMM(mvpMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
 
-        square.draw();
+        square.draw(mvpMatrix);
         triangle.draw(mvpMatrix);
     }
 

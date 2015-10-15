@@ -14,9 +14,10 @@ import ua.dotsenko.testogles.TryRenderer;
  */
 public class Square {
     private final String vertexShaderCode =
+            "uniform mat4 uMVPMatrix;" +
             "attribute vec4 vPosition;" +
                     "void main () {" +
-                    " gl_Position = vPosition; " +
+                    " gl_Position = uMVPMatrix * vPosition; " +
                     "}";
     private final String fragmentShaderCode =
             "precision mediump float;" +
@@ -26,6 +27,8 @@ public class Square {
                     "}";
     private FloatBuffer vertexBuffer;
     private ShortBuffer drawListBuffer;
+
+    private int mvpMatrixHandle;
 
     static final int COORDS_PER_VERTEX = 3;
 
@@ -67,6 +70,21 @@ public class Square {
         GLES20.glAttachShader(program, vertexShader);
         GLES20.glAttachShader(program, fragmentShader);
         GLES20.glLinkProgram(program);
+    }
+
+    public void draw(float [] mvpMatrix) {
+        GLES20.glUseProgram(program);
+        positionHandle = GLES20.glGetAttribLocation(program, "vPosition");
+        GLES20.glEnableVertexAttribArray(positionHandle);
+        GLES20.glVertexAttribPointer(positionHandle, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false,
+                vertexStride, vertexBuffer);
+        colorHandle = GLES20.glGetUniformLocation(program, "vColor");
+        GLES20.glUniform4fv(colorHandle, 1, color, 0);
+        mvpMatrixHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix");
+        GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0);
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, drawOrder.length, GLES20.GL_UNSIGNED_SHORT, drawListBuffer);
+        GLES20.glDisableVertexAttribArray(positionHandle);
+
     }
 
     public void draw(){
