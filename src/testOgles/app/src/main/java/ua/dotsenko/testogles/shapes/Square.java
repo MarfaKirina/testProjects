@@ -33,10 +33,10 @@ public class Square {
     static final int COORDS_PER_VERTEX = 3;
 
     static float squareCoords[] = { //in counterclockwise order: (positive orientation)
-            -0.5f, 0.5f, 0f, //top left
-            -0.5f, -0.5f, 0.0f, //bottom left
-            0.5f, -0.5f, 0.0f, //bottom right
-            0.5f, 0.5f, 0f //top right
+            -1f, 1f, 0f, //top left
+            -1f, -2f, 0.0f, //bottom left
+            1f, -1f, 0.0f, //bottom right
+            1f, 1f, 0f //top right
     };
 
     private short drawOrder[] = {0, 1, 2, 0, 2, 3};

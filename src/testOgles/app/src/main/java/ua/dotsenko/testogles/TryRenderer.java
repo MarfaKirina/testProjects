@@ -33,9 +33,9 @@ public class TryRenderer implements GLSurfaceView.Renderer{
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        GLES20.glClearColor(0,0,0,0);
+        GLES20.glClearColor(255,0,0,255);
         float[] scratch = new float[16];
-        Matrix.setLookAtM(viewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1f, 0f);
+        Matrix.setLookAtM(viewMatrix, 0, 0, -5f, -3f, 0f, 0f, 0f, 0f, 1f, 0f);
         Matrix.multiplyMM(mvpMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
         long time = SystemClock.uptimeMillis() % 4000L;
         float angle = 0.090f * time;
